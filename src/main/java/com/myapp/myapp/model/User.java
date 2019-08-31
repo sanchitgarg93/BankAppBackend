@@ -2,9 +2,14 @@ package com.myapp.myapp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+
+import lombok.Data;
 
 @Entity
-public class User {
+@Inheritance
+@Data
+public abstract class User {
 
 	@Id
 	String userName;

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Staff extends User {
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(mappedBy = "staff")
 	List<Appointment> appointmentReservation;
 
 }

@@ -8,18 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Branch {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Customer {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	String phone;
 	String name;
-	String city;
-	String pincode;
-	String state;
 
 }
