@@ -34,9 +34,7 @@ public class Appointment {
 	Date date;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	Customer customer;
-	@ManyToMany
-	@JoinTable(name = "staff_customer_appointment", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
-			@JoinColumn(name = "userName") })
-	List<Staff> staff;
+	@ManyToOne
+	Staff staff;
 	AppointmentStatus status = AppointmentStatus.UNATTENDED;
 }

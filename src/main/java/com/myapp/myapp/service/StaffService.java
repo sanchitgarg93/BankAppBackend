@@ -20,17 +20,8 @@ public class StaffService {
 	@Autowired
 	StaffRepository staffRepo;
 
-	public List<Appointment> findAppointmentsForStaffForToday(String userName) throws Exception {
-		Optional<Staff> staffOption = staffRepo.findById(userName);
-		
-		if(!staffOption.isPresent()) {
-			System.out.println("satff not found");
-			return null;}
-		
-		Staff staff=staffOption.get();
-		
-		staff.setUserName(userName);
-		
+	public List<Appointment> findAppointmentsForStaffForToday(Staff staff) throws Exception {
+
 		Date date = new Date();
 		return apptmntRepo.findByStaffAndDate(staff, date);
 	}

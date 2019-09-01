@@ -41,6 +41,7 @@ public class SaveSampleDataOnStartup {
 		branchRepo.save(br2);
 
 		// -------------------------
+
 		BranchManager bManager = new BranchManager();
 		bManager.setName("Sanchit Brach Manger");
 		bManager.setUserName("sanchit@mail.com");
@@ -66,11 +67,7 @@ public class SaveSampleDataOnStartup {
 
 		Customer customer = new Customer("9876543210", "Sanchit Customer");
 		Appointment appointment = new Appointment(null, "Account", "Account Creation", br1, new Date(), customer,
-				new ArrayList<Staff>() {
-					{
-						add(staff1);
-					}
-				}, AppointmentStatus.UNATTENDED);
+				staff1, AppointmentStatus.UNATTENDED);
 		appointmentRepo.save(appointment);
 	}
 

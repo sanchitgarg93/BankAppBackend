@@ -3,7 +3,7 @@ package com.myapp.myapp.model;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Staff extends User {
 	@JsonIgnore
-	@ManyToMany(mappedBy = "staff")
+	@OneToMany
 	List<Appointment> appointmentReservation;
 
 }

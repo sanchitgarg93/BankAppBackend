@@ -11,7 +11,6 @@ import com.myapp.myapp.model.Staff;
 
 @Repository
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
-
 	List<Appointment> findByStaffAndDate(Staff staff, Date date);
 
 }
