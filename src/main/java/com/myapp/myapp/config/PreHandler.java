@@ -38,13 +38,12 @@ public class PreHandler implements HandlerInterceptor {
 			final String[] values = credentials.split(":", 2);
 
 			if (values.length != 2) {
-
+				return setUnAuthenicatedResponseAndReturnFalse(response);
 			}
 			Optional<User> userOptional = userRepo.findById(values[0]);
 
 			if (!userOptional.isPresent()) {
-				setUnAuthenicatedResponse(response);
-				return false;
+				return setUnAuthenicatedResponseAndReturnFalse(response);
 			}
 
 			User user = userOptional.get();
@@ -53,17 +52,16 @@ public class PreHandler implements HandlerInterceptor {
 				request.setAttribute("user", user);
 				return true;
 			} else {
-				setUnAuthenicatedResponse(response);
-				return false;
+				return setUnAuthenicatedResponseAndReturnFalse(response);
 			}
 		} else {
-			setUnAuthenicatedResponse(response);
-			return false;
+			return setUnAuthenicatedResponseAndReturnFalse(response);
 		}
 	}
 
-	public void setUnAuthenicatedResponse(HttpServletResponse response) {
+	public boolean setUnAuthenicatedResponseAndReturnFalse(HttpServletResponse response) {
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		return false;
 	}
 
 }
