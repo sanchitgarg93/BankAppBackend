@@ -37,19 +37,27 @@ public class SaveSampleDataOnStartup {
 		branchRepo.deleteAll();
 		Branch br1 = new Branch(null, "RUNKUTA", "AGRA", "282007", "UTTER PRADESH");
 		Branch br2 = new Branch(null, "SAKET AGRA", "AGRA", "252010", "UTTER PRADESH");
+		Branch br3 = new Branch(null, "Chickpet", "BANGALORE", "560053", "KARNATAKA");
+    Branch br4 = new Branch(null, "Wilson Garden", "BANGALORE", "560027", "KARNATAKA");
+    Branch br5 = new Branch(null, "J P Nagar", "BANGALORE", "560076", "KARNATAKA");
+    Branch br6 = new Branch(null, "Cantonment", "BANGALORE", "560042", "KARNATAKA");
 		branchRepo.save(br1);
 		branchRepo.save(br2);
+    branchRepo.save(br3);
+    branchRepo.save(br4);
+    branchRepo.save(br5);
+    branchRepo.save(br6);
 
 		// -------------------------
 
 		BranchHead bManager = new BranchHead();
-		bManager.setName("Sanchit Brach Manger");
-		bManager.setUserName("sanchit@mail.com");
+		bManager.setName("Branch Manager 1");
+		bManager.setUserName("sanchitgarg2012@gmail.com");
 		bManager.setPassword("1234");
 		bManager.setRole(Role.BRANCH_HEAD);
-		bManager.setOwnedBraches(new ArrayList<Branch>() {
+		bManager.setOwnedBranches(new ArrayList<Branch>() {
 			{
-				add(br1);
+				add(br3);
 			}
 		});
 		bmRepo.save(bManager);
@@ -57,15 +65,15 @@ public class SaveSampleDataOnStartup {
 		// ------------------------------
 
 		Staff staff1 = new Staff();
-		staff1.setUserName("staff@mail.com");
-		staff1.setName("Yusuf Staff");
+		staff1.setUserName("staff@gmail.com");
+		staff1.setName("Staff 1");
 		staff1.setPassword("1234");
 		staff1.setRole(Role.STAFF);
 		staffRepo.save(staff1);
 
 		// --------------------------------
 
-		Customer customer = new Customer("9876543210", "Sanchit Customer");
+		Customer customer = new Customer("9876543210", "Customer 1");
 		Appointment appointment = new Appointment(null, "Account", "Account Creation", br1, new Date(), customer,
 				staff1, AppointmentStatus.UNATTENDED);
 		appointmentRepo.save(appointment);

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class BranchHead extends User {
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	List<Branch> ownedBraches;
+	List<Branch> ownedBranches;
 	@OneToOne
 	BranchHeadPolicy policy;
 }

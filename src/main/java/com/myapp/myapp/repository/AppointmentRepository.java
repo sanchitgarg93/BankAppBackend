@@ -12,8 +12,10 @@ import com.myapp.myapp.model.Staff;
 
 @Repository
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
-	List<Appointment> findByStaffAndDate(Staff staff, Date date);
-
-	List<Appointment> findAllByBranchInAndDate(List<Branch> ownedBraches, Date date);
-
+	
+  public List<Appointment> findByStaffAndDate(Staff staff, Date date);
+	
+	public List<Appointment> findAllByBranchInAndDate(List<Branch> ownedBranches, Date date);
+	
+	public Long countByStaffAndDate(Staff staff, Date date);
 }

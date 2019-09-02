@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.myapp.myapp.model.Appointment;
@@ -16,6 +17,13 @@ import com.myapp.myapp.repository.StaffRepository;
 @Service
 public class StaffService {
 
+  /** Is staff available. */
+  private Boolean isStaffAvailable = false;
+
+  /** Maximum number of appointments a staff can handle in a day.*/
+  @Value("${maxNumberOfAppoinments}")
+  private Integer maxNumberOfAppoinments;
+  
 	@Autowired
 	AppointmentRepository apptmntRepo;
 	@Autowired
@@ -41,5 +49,24 @@ public class StaffService {
 		appointmentGet.setStatus(status);
 		apptmntRepo.save(appointmentGet);
 	}
+	
+	/**
+   * Find available staff.
+   *
+   * @return the staff
+   */
+  public Staff findAvailableStaff() {
+    Iterable<Staff> iterableStaff = staffRepo.findAll();
+    for (Staff s: iterableStaff) {
+      if(apptmntRepo.countByStaffAndDate(s, new Date()) < maxNumberOfAppoinments) {
+        isStaffAvailable = true;
+        return s;
+      }
+      if (!isStaffAvailable) {
+        return null;
+      }
+    }
+    return new Staff();
+  }
 
 }

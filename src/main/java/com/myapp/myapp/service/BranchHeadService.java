@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.myapp.myapp.model.Appointment;
 import com.myapp.myapp.model.Branch;
+import com.myapp.myapp.model.BranchHead;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
+import com.myapp.myapp.repository.BranchHeadRepository;
 import com.myapp.myapp.repository.StaffRepository;
 
 @Service
@@ -21,11 +23,16 @@ public class BranchHeadService {
 
 	@Autowired
 	StaffRepository staffRepository;
+	
+	@Autowired
+  BranchHeadRepository branchHeadRepository;
+  
+  public BranchHead getBranchHead(Branch branch) {
+    return branchHeadRepository.findByOwnedBranches(branch);
+  }
 
-	public List<Appointment> getAllBranchAppointmentsForToday(List<Branch> ownedBraches) {
-
-		return appointmentRepo.findAllByBranchInAndDate(ownedBraches, new Date());
-
+	public List<Appointment> getAllBranchAppointmentsForToday(List<Branch> ownedBranches) {
+		return appointmentRepo.findAllByBranchInAndDate(ownedBranches, new Date());
 	}
 
 	public void changeAppointmentStaff(Long appointmentId, String username) throws Exception {

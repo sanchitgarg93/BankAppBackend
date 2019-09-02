@@ -1,4 +1,4 @@
-package com.myapp.myapp.cotroller;
+package com.myapp.myapp.controller;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.myapp.myapp.model.BranchHead;
 import com.myapp.myapp.service.BranchHeadService;
 
 @RestController
-@RequestMapping("/brach_head")
+@RequestMapping("/branch_head")
 public class BranchHeadController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class BranchHeadController {
 			return null;
 		BranchHead branchHead = (BranchHead) obj;
 		try {
-			return branchHeadService.getAllBranchAppointmentsForToday(branchHead.getOwnedBraches());
+			return branchHeadService.getAllBranchAppointmentsForToday(branchHead.getOwnedBranches());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
