@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 import com.myapp.myapp.model.Appointment;
 import com.myapp.myapp.model.AppointmentStatus;
 import com.myapp.myapp.model.Branch;
-import com.myapp.myapp.model.BranchManager;
+import com.myapp.myapp.model.BranchHead;
 import com.myapp.myapp.model.Customer;
 import com.myapp.myapp.model.Role;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
-import com.myapp.myapp.repository.BranchManagerRepo;
+import com.myapp.myapp.repository.BranchHeadRepo;
 import com.myapp.myapp.repository.BranchRepository;
 import com.myapp.myapp.repository.StaffRepository;
 
@@ -26,7 +26,7 @@ public class SaveSampleDataOnStartup {
 	@Autowired
 	BranchRepository branchRepo;
 	@Autowired
-	BranchManagerRepo bmRepo;
+	BranchHeadRepo bmRepo;
 	@Autowired
 	StaffRepository staffRepo;
 	@Autowired
@@ -42,7 +42,7 @@ public class SaveSampleDataOnStartup {
 
 		// -------------------------
 
-		BranchManager bManager = new BranchManager();
+		BranchHead bManager = new BranchHead();
 		bManager.setName("Sanchit Brach Manger");
 		bManager.setUserName("sanchit@mail.com");
 		bManager.setPassword("1234");
