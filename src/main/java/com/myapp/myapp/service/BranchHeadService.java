@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.myapp.myapp.model.Appointment;
 import com.myapp.myapp.model.Branch;
 import com.myapp.myapp.model.BranchHead;
+import com.myapp.myapp.model.Role;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
 import com.myapp.myapp.repository.BranchHeadRepository;
@@ -26,13 +27,24 @@ public class BranchHeadService {
 	
 	@Autowired
   BranchHeadRepository branchHeadRepository;
+	
+	@Autowired
+	StaffService staffService;
   
   public BranchHead getBranchHead(Branch branch) {
     return branchHeadRepository.findByOwnedBranches(branch);
   }
+  
+  public Branch findBranchbyBranchHeadUserName(String branchHeadUserName) {
+    return branchHeadRepository.findByUserNameAndRole(branchHeadUserName, Role.BRANCH_HEAD);
+  }
 
 	public List<Appointment> getAllBranchAppointmentsForToday(List<Branch> ownedBranches) {
 		return appointmentRepo.findAllByBranchInAndDate(ownedBranches, new Date());
+	}
+	
+	public List<Staff> findStaffByBranch(Branch branch){
+	  return staffService.findStaffByBranch(branch);
 	}
 
 	public void changeAppointmentStaff(Long appointmentId, String username) throws Exception {

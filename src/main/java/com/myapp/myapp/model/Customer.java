@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Customer {
 
 	@Id
-	String phone;
-	String name;
-
+	private String phone;
+	private String name;
+	private Boolean isHNI = Boolean.FALSE;
 }

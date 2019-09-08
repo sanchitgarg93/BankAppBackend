@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.UrlPathHelper;
 
@@ -27,7 +28,7 @@ public class PreHandler implements HandlerInterceptor {
 
 		final String authorization = request.getHeader("Authorization");
 		String resourcePath = new UrlPathHelper().getPathWithinApplication(request);
-		if (resourcePath.startsWith("/customer"))
+		if (resourcePath.startsWith("/customer") || resourcePath.startsWith("/hni")) 
 			return true;
 		if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
 			// Authorization: Basic base64credentials

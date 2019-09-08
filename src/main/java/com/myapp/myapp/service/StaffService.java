@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.myapp.myapp.model.Appointment;
 import com.myapp.myapp.model.AppointmentStatus;
+import com.myapp.myapp.model.Branch;
+import com.myapp.myapp.model.Role;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
 import com.myapp.myapp.repository.StaffRepository;
@@ -25,29 +27,29 @@ public class StaffService {
   private Integer maxNumberOfAppoinments;
   
 	@Autowired
-	AppointmentRepository apptmntRepo;
+	AppointmentRepository apptmntRepository;
 	@Autowired
-	StaffRepository staffRepo;
+	StaffRepository staffRepository;
 
 	public List<Appointment> findAppointmentsForStaffForToday(Staff staff) throws Exception {
 
 		Date date = new Date();
-		return apptmntRepo.findByStaffAndDate(staff, date);
+		return apptmntRepository.findByStaffAndDate(staff, date);
 	}
 
 	public void updateAppointment(Appointment appointment) {
 
-		apptmntRepo.save(appointment);
+		apptmntRepository.save(appointment);
 	}
 
 	public void updateAppointment(Long apid, AppointmentStatus status) throws Exception {
-		Optional<Appointment> appointment = apptmntRepo.findById(apid);
+		Optional<Appointment> appointment = apptmntRepository.findById(apid);
 		if (!appointment.isPresent()) {
 			throw new Exception("invalid appointment id");
 		}
 		Appointment appointmentGet = appointment.get();
 		appointmentGet.setStatus(status);
-		apptmntRepo.save(appointmentGet);
+		apptmntRepository.save(appointmentGet);
 	}
 	
 	/**
@@ -56,9 +58,9 @@ public class StaffService {
    * @return the staff
    */
   public Staff findAvailableStaff() {
-    Iterable<Staff> iterableStaff = staffRepo.findAll();
+    Iterable<Staff> iterableStaff = staffRepository.findAll();
     for (Staff s: iterableStaff) {
-      if(apptmntRepo.countByStaffAndDate(s, new Date()) < maxNumberOfAppoinments) {
+      if(apptmntRepository.countByStaffAndDate(s, new Date()) < maxNumberOfAppoinments) {
         isStaffAvailable = true;
         return s;
       }
@@ -67,6 +69,10 @@ public class StaffService {
       }
     }
     return new Staff();
+  }
+  
+  public List<Staff> findStaffByBranch(Branch branch){
+    return staffRepository.findByBranchAndRole(branch, Role.STAFF);
   }
 
 }

@@ -3,6 +3,7 @@ package com.myapp.myapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.myapp.myapp.model.Appointment;
 import com.myapp.myapp.model.Branch;
@@ -49,6 +51,11 @@ public class CustomerController {
   
   @Autowired
   private JavaMailSender javaMailSender;
+  
+  @Autowired
+  RestTemplate restTemplate;
+  
+  private String url = "http://localhost:8080";
 
   /**
    * Gets the branches.
@@ -77,6 +84,7 @@ public class CustomerController {
     Customer customer = new Customer();
     customer.setName(customerAppointmentRequest.getName());
     customer.setPhone(customerAppointmentRequest.getPhone());
+    customer.setIsHNI(Boolean.FALSE);
     Appointment appointment = new Appointment();
     appointment.setBranch(branch);
     appointment.setCustomer(customer);
@@ -89,13 +97,21 @@ public class CustomerController {
       appointment.setStaff(staff);
       try {
         appointment = appointmentRepo.save(appointment);
-        
-        //TODO IF CUSTOMER'S PHONE FOUND IN LIST OF HNI
-        
-        //Send notification to Branch Manager
-        BranchHead branchHead = branchHeadService.getBranchHead(branch);
-        System.out.println("Sending mail to branch head {} : " + branchHead.getUserName());
-        sendEmail(branchHead, customer, appointment);
+        //Check if Customer is HNI
+        Customer hniCustomers[] = restTemplate.getForObject(url+"/hni/customers", Customer[].class);
+        for(Customer hniCustomer : hniCustomers) {
+          if (customer.getPhone().equals(hniCustomer.getPhone())) {
+            System.out.println("High Net Worth Customer Books an appointment.");
+            customer.setIsHNI(Boolean.TRUE);
+            appointment = appointmentRepo.save(appointment);
+            //Send notification to Branch Manager
+            BranchHead branchHead = branchHeadService.getBranchHead(branch);
+            System.out.println("Sending mail to branch head {} : " + branchHead.getUserName());
+            sendEmail(branchHead, customer, appointment);
+          }
+          else
+            appointment = appointmentRepo.save(appointment);
+        }
       } catch (Exception e) {
         
         System.out.println("Exception {} : " + e);
@@ -108,7 +124,7 @@ public class CustomerController {
     return appointment;
   }
   
-  void sendEmail(BranchHead branchHead, Customer customer, Appointment appointment) {
+  public void sendEmail(BranchHead branchHead, Customer customer, Appointment appointment) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(branchHead.getUserName());
         msg.setSubject("High Net Worth Customer Visiting Your Branch");

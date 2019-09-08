@@ -16,7 +16,7 @@ import com.myapp.myapp.model.Customer;
 import com.myapp.myapp.model.Role;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
-import com.myapp.myapp.repository.BranchHeadRepo;
+import com.myapp.myapp.repository.BranchHeadRepository;
 import com.myapp.myapp.repository.BranchRepository;
 import com.myapp.myapp.repository.StaffRepository;
 
@@ -24,9 +24,9 @@ import com.myapp.myapp.repository.StaffRepository;
 public class SaveSampleDataOnStartup {
 
 	@Autowired
-	BranchRepository branchRepo;
+	BranchRepository branchRepository;
 	@Autowired
-	BranchHeadRepo bmRepo;
+	BranchHeadRepository branchHeadRepository;
 	@Autowired
 	StaffRepository staffRepo;
 	@Autowired
@@ -34,46 +34,100 @@ public class SaveSampleDataOnStartup {
 
 	@PostConstruct
 	public void saveData() {
-		branchRepo.deleteAll();
-		Branch br1 = new Branch(null, "RUNKUTA", "AGRA", "282007", "UTTER PRADESH");
-		Branch br2 = new Branch(null, "SAKET AGRA", "AGRA", "252010", "UTTER PRADESH");
-		Branch br3 = new Branch(null, "Chickpet", "BANGALORE", "560053", "KARNATAKA");
-    Branch br4 = new Branch(null, "Wilson Garden", "BANGALORE", "560027", "KARNATAKA");
-    Branch br5 = new Branch(null, "J P Nagar", "BANGALORE", "560076", "KARNATAKA");
-    Branch br6 = new Branch(null, "Cantonment", "BANGALORE", "560042", "KARNATAKA");
-		branchRepo.save(br1);
-		branchRepo.save(br2);
-    branchRepo.save(br3);
-    branchRepo.save(br4);
-    branchRepo.save(br5);
-    branchRepo.save(br6);
+		branchRepository.deleteAll();
+		Branch br1 = new Branch(null, "Chickpet", "BANGALORE", "560053", "KARNATAKA");
+    Branch br2 = new Branch(null, "Wilson Garden", "BANGALORE", "560027", "KARNATAKA");
+    Branch br3 = new Branch(null, "J P Nagar", "BANGALORE", "560076", "KARNATAKA");
+    Branch br4 = new Branch(null, "Cantonment", "BANGALORE", "560042", "KARNATAKA");
+    Branch br5 = new Branch(null, "Pitampura", "DELHI", "110088", "DELHI");
+    
+    branchRepository.save(br1);
+    branchRepository.save(br2);
+    branchRepository.save(br3);
+    branchRepository.save(br4);
+    branchRepository.save(br5);
 
-		// -------------------------
+		// ---------Adding Sample Data for Branch Head ----------------
 
-		BranchHead bManager = new BranchHead();
-		bManager.setName("Branch Manager 1");
-		bManager.setUserName("sanchitgarg2012@gmail.com");
-		bManager.setPassword("1234");
-		bManager.setRole(Role.BRANCH_HEAD);
-		bManager.setOwnedBranches(new ArrayList<Branch>() {
+		BranchHead branchHead1 = new BranchHead();
+		branchHead1.setName("Branch Head 1");
+		branchHead1.setUserName("sanchitgarg2012@gmail.com");
+		branchHead1.setPassword("1234");
+		branchHead1.setRole(Role.BRANCH_HEAD);
+		branchHead1.setOwnedBranches(new ArrayList<Branch>() {
 			{
-				add(br3);
+				add(br1);
 			}
 		});
-		bmRepo.save(bManager);
+		branchHeadRepository.save(branchHead1);
+		
+		BranchHead branchHead2 = new BranchHead();
+		branchHead2.setName("Branch Head 2");
+		branchHead2.setUserName("branchhead2@gmail.com");
+		branchHead2.setPassword("1234");
+		branchHead2.setRole(Role.BRANCH_HEAD);
+		branchHead2.setOwnedBranches(new ArrayList<Branch>() {
+      {
+        add(br2);
+      }
+    });
+		branchHeadRepository.save(branchHead2);
+		
+		BranchHead branchHead3 = new BranchHead();
+    branchHead3.setName("Branch Head 3");
+    branchHead3.setUserName("branchhead3@gmail.com");
+    branchHead3.setPassword("1234");
+    branchHead3.setRole(Role.BRANCH_HEAD);
+    branchHead3.setOwnedBranches(new ArrayList<Branch>() {
+      {
+        add(br3);
+      }
+    });
+    branchHeadRepository.save(branchHead3);
+    
+    BranchHead branchHead4 = new BranchHead();
+    branchHead4.setName("Branch Head 2");
+    branchHead4.setUserName("branchhead4@gmail.com");
+    branchHead4.setPassword("1234");
+    branchHead4.setRole(Role.BRANCH_HEAD);
+    branchHead4.setOwnedBranches(new ArrayList<Branch>() {
+      {
+        add(br4);
+      }
+    });
+    branchHeadRepository.save(branchHead4);
+    
+    BranchHead branchHead5 = new BranchHead();
+    branchHead5.setName("Branch Head 5");
+    branchHead5.setUserName("branchhead5@gmail.com");
+    branchHead5.setPassword("1234");
+    branchHead5.setRole(Role.BRANCH_HEAD);
+    branchHead5.setOwnedBranches(new ArrayList<Branch>() {
+      {
+        add(br5);
+      }
+    });
+    branchHeadRepository.save(branchHead5);
 
-		// ------------------------------
+		// -------------Adding Sample Data for Staff-----------------
 
 		Staff staff1 = new Staff();
-		staff1.setUserName("staff@gmail.com");
+		staff1.setUserName("staff1@gmail.com");
 		staff1.setName("Staff 1");
 		staff1.setPassword("1234");
 		staff1.setRole(Role.STAFF);
 		staffRepo.save(staff1);
+		
+		Staff staff2 = new Staff();
+    staff2.setUserName("staff2@gmail.com");
+    staff2.setName("Staff 2");
+    staff2.setPassword("1234");
+    staff2.setRole(Role.STAFF);
+    staffRepo.save(staff2);
 
-		// --------------------------------
+		// -------------Adding Sample Data for Customer-------------------
 
-		Customer customer = new Customer("9876543210", "Customer 1");
+		Customer customer = new Customer("9873797189", "Customer 1", Boolean.FALSE);
 		Appointment appointment = new Appointment(null, "Account", "Account Creation", br1, new Date(), customer,
 				staff1, AppointmentStatus.UNATTENDED);
 		appointmentRepo.save(appointment);

@@ -7,10 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import com.myapp.myapp.model.Branch;
 import com.myapp.myapp.model.BranchHead;
+import com.myapp.myapp.model.Role;
 
 @Repository
 public interface BranchHeadRepository extends CrudRepository<BranchHead, String> {
 
 	public BranchHead findByOwnedBranches(Branch branch);
+	
+	public Branch findByUserNameAndRole(String branchHeadUserName, Role role);
 
 }

@@ -1,5 +1,7 @@
 package com.myapp.myapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,9 @@ public class CustomerService {
   
   public void saveCustomer(Customer customer) {
     customerRepository.save(customer);
+  }
+  
+  public List<Customer> findHNI() {
+    return (List<Customer>) customerRepository.findTop100By();
   }
 }
