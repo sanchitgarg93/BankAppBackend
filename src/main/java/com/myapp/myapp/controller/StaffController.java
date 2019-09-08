@@ -42,9 +42,10 @@ public class StaffController {
 	public ResponseEntity<String> changeStatus(HttpServletRequest request, @RequestBody ChangeAptStatusDTO changeAptStatusDTO) {
 		Object obj = request.getAttribute("user");
 		if (!(obj instanceof Staff))
-			return ResponseEntity.ok().body("Appoinment Status changed to "+changeAptStatusDTO.getStatus());
+			return null;
 		try {
 			staffService.updateAppointment(changeAptStatusDTO.getId(), changeAptStatusDTO.getStatus());
+			return ResponseEntity.ok().body("Appoinment Status changed to "+changeAptStatusDTO.getStatus());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
