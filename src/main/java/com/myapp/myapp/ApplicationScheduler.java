@@ -35,8 +35,7 @@ public class ApplicationScheduler {
   private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter
       .ofPattern("HH:mm:ss");
 
-  // @Scheduled(cron = "0 9 * * 1-6 ?")
-  @Scheduled(cron = "* * * * * ?")
+  @Scheduled(cron = "0 9 * * 1-6 ?")  //Send daily mails at 9:00 AM (Mon-Sat)
   public void scheduleTaskWithCronExpression() {
     logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
 
