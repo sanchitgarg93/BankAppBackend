@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,19 +56,20 @@ public class BranchHeadController {
 	}
 
 	@PostMapping(path = "/reassign_staff")
-	public void reassignStaff(HttpServletRequest request,
+	public ResponseEntity<String> reassignStaff(HttpServletRequest request,
 			@RequestBody ChangeAppointmentStaffDto changeAppointmentStaffDto) {
 		Object obj = request.getAttribute("user");
 		if (!(obj instanceof BranchHead))
-			return;
+			return null;
 		BranchHead branchHead = (BranchHead) obj;
 		try {
 			branchHeadService.changeAppointmentStaff(changeAppointmentStaffDto.getAppointmentId(),
 					changeAppointmentStaffDto.getUsername());
+			return ResponseEntity.ok().body("Appoinment assigned to "+changeAppointmentStaffDto.getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return;
+		return null;
 	}
 
 }
