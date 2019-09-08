@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "ecc4d36c-766b-4b3f-aba2-39cd79e7f068",
+		"name": "Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Appointments for a staff",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/appointments/staff@mail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"appointments",
+						"staff@mail.com"
+					]
+				},
+				"description": "To get list of appointments for the day for a given staff"
+			},
+			"response": []
+		},
+		{
+			"name": "Make appointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"phone\":\"9999209434\",\n\t\"name\":\"Alec\",\n\t\"branchName\":\"Chickpet\",\n\t\"purpose\":\"Withdrawal\",\n\t\"subPurpose\":\"Account Withdrawal\",\n\t\"date\":\"2019-09-15\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer/appointments/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"appointments",
+						""
+					]
+				},
+				"description": "Customer schedules an appointment"
+			},
+			"response": []
+		},
+		{
+			"name": "Change Appointment Status by Staff",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "staff1@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"7\",\n\t\"status\" : \"UNATTENDED\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/staff/change_appintment_status",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"staff",
+						"change_appintment_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get High Net Worth Customers Dummy API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/hni/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hni",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - Get Branches in a City",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "city",
+						"value": "BANGALORE",
+						"type": "text"
+					},
+					{
+						"key": "state",
+						"value": "KARNATAKA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/customer/branches",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"branches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Branch Head - Get All appointments for the day",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "sanchitgarg2012@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/branch_head/find_branch_appointments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"branch_head",
+						"find_branch_appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Branch Head - Reassign Staff",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "sanchitgarg2012@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : \"7\",\n\t\"username\" : \"staff2@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/branch_head/reassign_staff",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"branch_head",
+						"reassign_staff"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
