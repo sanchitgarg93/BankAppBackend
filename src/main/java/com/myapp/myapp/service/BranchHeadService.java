@@ -55,7 +55,7 @@ public class BranchHeadService {
 
 		Optional<Staff> staffOptional = staffRepository.findById(username);
 		if (!staffOptional.isPresent())
-			throw new Exception("invalid appointment id");
+			throw new Exception("invalid staff username");
 
 		Appointment appointment = appointmentOpt.get();
 		Staff staff = staffOptional.get();

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ChangeAppointmentStaffDto {
 
-	Long appointmentId;
-	String username;
-	
+  private Long id;
+  private String username;
+
 }
