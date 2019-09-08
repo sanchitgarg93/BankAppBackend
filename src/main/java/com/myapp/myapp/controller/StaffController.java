@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,15 +39,16 @@ public class StaffController {
 	}
 
 	@PutMapping(path = "/change_appintment_status")
-	public void changeStatus(HttpServletRequest request, @RequestBody ChangeAptStatusDTO changeAptStatusDTO) {
+	public ResponseEntity<String> changeStatus(HttpServletRequest request, @RequestBody ChangeAptStatusDTO changeAptStatusDTO) {
 		Object obj = request.getAttribute("user");
 		if (!(obj instanceof Staff))
-			return;
+			return ResponseEntity.ok().body("Appoinment Status changed to "+changeAptStatusDTO.getStatus());
 		try {
 			staffService.updateAppointment(changeAptStatusDTO.getId(), changeAptStatusDTO.getStatus());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    return null;
 	}
 
 }
