@@ -63,7 +63,7 @@ public class BranchHeadController {
       return null;
     BranchHead branchHead = (BranchHead) obj;
     try {
-      branchHeadService.changeAppointmentStaff(changeAppointmentStaffDto.getAppointmentId(),
+      branchHeadService.changeAppointmentStaff(changeAppointmentStaffDto.getId(),
           changeAppointmentStaffDto.getUsername());
       return ResponseEntity.ok()
           .body("Appoinment assigned to " + changeAppointmentStaffDto.getUsername());
