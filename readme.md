@@ -62,3 +62,5 @@ Rest API's
 	    "id" : "7",
 	    "username" : "staff2@gmail.com"
    }
+
+Please refer to the screenshots for more details.
