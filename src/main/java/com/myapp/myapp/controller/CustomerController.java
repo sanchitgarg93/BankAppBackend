@@ -3,6 +3,7 @@ package com.myapp.myapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -55,7 +56,9 @@ public class CustomerController {
   @Autowired
   RestTemplate restTemplate;
   
-  private String url = "http://localhost:8080";
+  /** URL for getting list of hni customers*/
+  @Value("${url}")
+  private String url;
 
   /**
    * Gets the branches.

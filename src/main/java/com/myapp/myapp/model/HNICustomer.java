@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HNICustomer {
 
-  @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String phone;
