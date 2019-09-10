@@ -3,11 +3,10 @@ The application can be tested using any Rest Client such as Postman. We have men
 
 Before running the application, please ensure you meet the following software requirements.
 1. Java 8 or higher must be installed
-2. MySQL instance should be running.
-3. Create a database "bankapp"
-4. Open command prompt -> Change the directory where the file : **myapp-0.0.1-SNAPSHOT** is present.
-5. Run the following command:  java -jar myapp-0.0.1-SNAPSHOT
+2. Open command prompt -> Change the directory where the file : **myapp-0.0.1-SNAPSHOT** is present.
+3. Run the following command:  java -jar myapp-0.0.1-SNAPSHOT
 
+Note: AWS RDS service Free Tier MySQL instance is being used. Connectivity issues to it may impact the performance of the API's
 
 App URL: **localhost:8080**
 
