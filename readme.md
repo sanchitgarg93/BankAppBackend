@@ -8,7 +8,7 @@ Before running the application, please ensure you meet the following software re
 
 Note: AWS RDS service Free Tier MySQL instance is being used. Connectivity issues to it may impact the performance of the API's
 
-App URL: **localhost:8080**
+App URL: **localhost:5000**
 
 Rest API's
 1.  GET /customer/branches  -  List of branches displayed to the customer after selection of the name of the state and city
