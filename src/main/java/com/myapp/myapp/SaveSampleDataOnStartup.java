@@ -13,11 +13,13 @@ import com.myapp.myapp.model.AppointmentStatus;
 import com.myapp.myapp.model.Branch;
 import com.myapp.myapp.model.BranchHead;
 import com.myapp.myapp.model.Customer;
+import com.myapp.myapp.model.HNICustomer;
 import com.myapp.myapp.model.Role;
 import com.myapp.myapp.model.Staff;
 import com.myapp.myapp.repository.AppointmentRepository;
 import com.myapp.myapp.repository.BranchHeadRepository;
 import com.myapp.myapp.repository.BranchRepository;
+import com.myapp.myapp.repository.HNICustomerRepository;
 import com.myapp.myapp.repository.StaffRepository;
 
 @Component
@@ -31,6 +33,8 @@ public class SaveSampleDataOnStartup {
 	StaffRepository staffRepo;
 	@Autowired
 	AppointmentRepository appointmentRepo;
+	@Autowired
+	HNICustomerRepository hniCustomerRepo;
 
 	@PostConstruct
 	public void saveData() {
@@ -131,6 +135,10 @@ public class SaveSampleDataOnStartup {
 		Appointment appointment = new Appointment(null, "Account", "Account Creation", br1, new Date(), customer,
 				staff1, AppointmentStatus.UNATTENDED);
 		appointmentRepo.save(appointment);
+		
+		// -------------Adding Sample Data for HNICustomer-------------------
+		HNICustomer hnicustomer = new HNICustomer(1L, "Ankit","9873797189","3000000");
+		hniCustomerRepo.save(hnicustomer);	
 	}
 
 }

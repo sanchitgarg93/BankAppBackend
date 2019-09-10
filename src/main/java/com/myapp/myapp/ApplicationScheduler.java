@@ -55,7 +55,7 @@ public class ApplicationScheduler {
     msg.setTo(branchHead.getUserName());
     msg.setSubject("" + "Gentle Reminder! High Net Worth Customer Visiting Your Branch");
     msg.setText("Hi " + branchHead.getName() + ", \n\n" + customer.getName()
-        + " is going to visit your branch on " + appointment.getDate() + " for "
+        + " is going to visit your branch today for "
         + appointment.getPurpose() + ".\n\n" + "Sincerely,\n" + "Syndicate Bank");
     javaMailSender.send(msg);
   }

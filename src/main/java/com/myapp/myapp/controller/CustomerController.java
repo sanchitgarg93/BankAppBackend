@@ -96,7 +96,7 @@ public class CustomerController {
     if (staff != null) {
       appointment.setStaff(staff);
       try {
-        appointment = appointmentRepo.save(appointment);
+        //appointment = appointmentRepo.save(appointment);
         //Check if Customer is HNI
         Customer hniCustomers[] = restTemplate.getForObject(url+"/hni/customers", Customer[].class);
         for(Customer hniCustomer : hniCustomers) {
