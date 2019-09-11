@@ -132,6 +132,7 @@ public class SaveSampleDataOnStartup {
 		// -------------Adding Sample Data for Customer-------------------
 
 		Customer customer = new Customer("9873797189", "Customer 1", Boolean.FALSE);
+		
 		Appointment appointment = new Appointment(null, "Account", "Account Creation", br1, new Date(), customer,
 				staff1, AppointmentStatus.UNATTENDED);
 		appointmentRepo.save(appointment);
