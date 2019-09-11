@@ -8,17 +8,37 @@
 		{
 			"name": "Get Appointments for a staff",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "staff2@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/appointments/staff@mail.com",
+					"raw": "{{url}}/staff/appointments",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
-						"appointments",
-						"staff@mail.com"
+						"staff",
+						"appointments"
 					]
 				},
 				"description": "To get list of appointments for the day for a given staff"
@@ -39,14 +59,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"phone\":\"9999209434\",\n\t\"name\":\"Alec\",\n\t\"branchName\":\"Chickpet\",\n\t\"purpose\":\"Withdrawal\",\n\t\"subPurpose\":\"Account Withdrawal\",\n\t\"date\":\"2019-09-15\"\n}"
+					"raw": "{\n\t\"phone\":\"9873797187\",\n\t\"name\":\"Rahul\",\n\t\"branchName\":\"Cantonment\",\n\t\"purpose\":\"Demand Draft\",\n\t\"subPurpose\":\"Demand Draft Creation\",\n\t\"date\":\"2019-09-22\"\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/customer/appointments/",
+					"raw": "{{url}}/customer/appointments/",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"customer",
 						"appointments",
@@ -86,14 +105,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\": \"7\",\n\t\"status\" : \"UNATTENDED\"\n}"
+					"raw": "{\n\t\"id\": \"8\",\n\t\"status\" : \"ATTENDED\"\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/staff/change_appintment_status",
+					"raw": "{{url}}/staff/change_appintment_status",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"staff",
 						"change_appintment_status"
@@ -108,11 +126,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/hni/customers",
+					"raw": "{{url}}/hni/customers",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"hni",
 						"customers"
@@ -138,11 +155,10 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/customer/branches",
+					"raw": "{{url}}/customer/branches",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"customer",
 						"branches"
@@ -164,7 +180,7 @@
 						},
 						{
 							"key": "username",
-							"value": "sanchitgarg2012@gmail.com",
+							"value": "branchhead4@gmail.com",
 							"type": "string"
 						}
 					]
@@ -172,11 +188,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/branch_head/find_branch_appointments",
+					"raw": "{{url}}/branch_head/find_branch_appointments",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"branch_head",
 						"find_branch_appointments"
@@ -193,7 +208,7 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "sanchitgarg2012@gmail.com",
+							"value": "branchhead4@gmail.com",
 							"type": "string"
 						},
 						{
@@ -214,17 +229,78 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\" : \"7\",\n\t\"username\" : \"staff2@gmail.com\"\n}"
+					"raw": "{\n\t\"id\" : \"2\",\n\t\"username\" : \"staff2@gmail.com\"\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/branch_head/reassign_staff",
+					"raw": "{{url}}/branch_head/reassign_staff",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branch_head",
+						"reassign_staff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List of HNI Customers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Maria\",\n\t\"phone\": \"9876543210\",\n\t\"accountBalance\" : \"2500000\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/hni/customers",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"branch_head",
-						"reassign_staff"
+						"hni",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save HNI Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Roger\",\n\t\"phone\": \"9876543211\",\n\t\"accountBalance\" : \"2900000\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/hni/customers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"hni",
+						"customers"
 					]
 				}
 			},
