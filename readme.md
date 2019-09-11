@@ -12,7 +12,15 @@ The branch head can view the list of appointments in his/her branch for the day 
 
 Note: AWS RDS service MySQL instance and ElasticBeanstalk Free Tier is being used for deployment.
 
-Rest API's
+**Steps to Test the Rest API's**
+	
+1.  Open Postman
+2.  Import the Bank.postman_collection.json using the Import button 
+3.  Go to the Settings icon on the top right. A dialog box : manage environment opens up.
+4.  Add a new environment name: prod
+5.  Add a new variable : url
+6.  Set it's initial value as http://bankappbackend-env.ehbhe9ppne.us-east-2.elasticbeanstalk.com
+7.  You're good to go now.
 
 API I.  GET /customer/branches  -  List of branches displayed to the customer after selection of the name of the state and city
     Request Headers
