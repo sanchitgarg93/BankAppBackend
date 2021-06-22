@@ -28,7 +28,7 @@ API I.  GET /customer/branches  -  List of branches displayed to the customer af
     state : <state-name> Ex: KARNATAKA
     No Authorization Required
 
-API II.  GET /customer/appointments  -  Customer making an appointment prior to the branch visit
+API II.  POST /customer/appointments  -  Customer making an appointment prior to the branch visit
     Request Body
     Type: application/json
     {
